@@ -25,6 +25,15 @@ builder.Services.AddScoped<ICategoryServices, CategoryServices>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductServices, ProductServices>();
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+// Configuration of session
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(5);
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -47,6 +56,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+// for session
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

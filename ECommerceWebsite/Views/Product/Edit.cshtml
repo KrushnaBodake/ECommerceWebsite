@@ -10,8 +10,14 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Prodid" class="control-label"></label>
+                <input asp-for="Prodid" class="form-control" />
+                <span asp-validation-for="Prodid" class="text-danger"></span>
+            </div>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
             <div class="form-group">
                 <label asp-for="Prodname" class="control-label"></label>
                 <input asp-for="Prodname" class="form-control" />
@@ -25,19 +31,19 @@
             <div class="form-group">
                 <label asp-for="ImageUrl" class="control-label"></label>
                 <input class="form-control" type="file" name="file" />
+
             </div>
             <div class="form-group">
                 <label asp-for="Company" class="control-label"></label>
                 <input asp-for="Company" class="form-control" />
                 <span asp-validation-for="Company" class="text-danger"></span>
             </div>
-            
+           
             <div class="form-group">
                 <label asp-for="Catid" class="control-label"></label>
-                <select class="form-control" asp-for="Catid" asp-items="@(new SelectList(@ViewBag.Catagories,"Catid","Catname"))"></select>
-                <div class="form-group mb-3">
-                    <span asp-validation-for="Catid" class="text-danger"></span>
-             </div>
+                <select class="form-control" asp-for="Catid" asp-items="@(new SelectList(@ViewBag.Categories,"Catid","Catname"))"></select>
+                <span asp-validation-for="Catid" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Discount" class="control-label"></label>
                 <input asp-for="Discount" class="form-control" />

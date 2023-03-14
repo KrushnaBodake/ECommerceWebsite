@@ -1,4 +1,5 @@
 ﻿using ECommerceWebsite.Models;
+using ECommerceWebsite.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,16 +7,19 @@ namespace ECommerceWebsite.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IProductServices prodservice;
+        private readonly ICategoryServices catservice;
+        private Microsoft.AspNetCore.Hosting.IWebHostEnvironment env;
+        public HomeController(IProductServices prodservice, ICategoryServices catservice, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)
         {
-            _logger = logger;
+            this.prodservice = prodservice;
+            this.catservice = catservice;
+            this.env = env;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(prodservice.GetAllProduct());
         }
 
         public IActionResult Privacy()

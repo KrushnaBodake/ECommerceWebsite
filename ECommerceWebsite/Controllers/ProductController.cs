@@ -19,8 +19,23 @@ namespace ECommerceWebsite.Controllers
 
         public ActionResult Index()
         {
-            return View(prodservice.GetAllProduct());
+            var Plist = prodservice.GetAllProduct();
+            var Clist= catservice.GetAllCategories();
+            foreach (Product p in Plist)
+            {
+                foreach (Category c in Clist)
+                {
+                    if(p.Catid== c.Catid)
+                    {
+                        p.Catname = c.Catname;
+                    }                    
+                }
+            }
+            return View(Plist);
         }
+
+       
+
 
         // GET: ProductController/Details/5
         public ActionResult Details(int id)
@@ -65,7 +80,9 @@ namespace ECommerceWebsite.Controllers
             var prod = prodservice.GetProductById(id);
             var categories = catservice.GetAllCategories();
             ViewBag.Categories = categories;
-            HttpContext.Session.SetString("oldImageUrl", prod.ImageUrl); return View();
+            HttpContext.Session.SetString("oldImageUrl", prod.ImageUrl);
+            return View(prod);
+
         }
 
         // POST: ProductController/Edit/5

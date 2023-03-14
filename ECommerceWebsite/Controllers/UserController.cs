@@ -17,6 +17,7 @@ namespace ECommerceWebsite.Controllers
         {
             return View(services.GetAllUser());
         }
+      
 
         // GET: UserController/Details/5
         public ActionResult Details(int id)
@@ -109,26 +110,31 @@ namespace ECommerceWebsite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(User user)
         {
-            var list = services.GetAllUser();
+            User u = services.GetUserByEmail(user.Email);
+
             try
             {
-                foreach (var l in list)
+                if (u != null)
                 {
-                    if (l.RoleId == 1)
+                    if (user.Password == u.Password)
                     {
-                        if ((l.Email == user.Email) && (l.Password == user.Password))
+                        HttpContext.Session.SetString("RoleId", u.RoleId.ToString());
+                        HttpContext.Session.SetString("Id", u.Id.ToString());
+                        if (u.RoleId == 1)
                         {
-                            return RedirectToAction(nameof(Index));
+                            return RedirectToAction("Index","Product");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "UserProduct");
                         }
                     }
                     else
                     {
-                        if ((l.Email == user.Email) && (l.Password == user.Password))
-                        {
-                            return RedirectToAction("Index", "Product");
-                        }
+                        ViewBag.errormessage = "Username or password is wrong";
+                        return View();
                     }
-
+                    
                 }
             }
             catch
@@ -138,6 +144,11 @@ namespace ECommerceWebsite.Controllers
             return View();
 
 
+        }
+        public ActionResult LogOut()
+        {
+            HttpContext.Session.Clear();
+            return View("Login");
         }
     }
 }

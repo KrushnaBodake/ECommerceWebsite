@@ -1,4 +1,5 @@
-﻿using ECommerceWebsite.Data;
+﻿
+using ECommerceWebsite.Data;
 using ECommerceWebsite.Models;
 
 namespace ECommerceWebsite.Repository
@@ -33,6 +34,12 @@ namespace ECommerceWebsite.Repository
         public IEnumerable<User> GetAllUser()
         {
             return db.Users.ToList();
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            var user = db.Users.Where(x => x.Email == email).FirstOrDefault();
+            return user;
         }
 
         public User GetUserById(int id)

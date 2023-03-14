@@ -19,7 +19,7 @@ namespace ECommerceWebsite.Services
         {
             return repo.DeleteUser(id);
         }
-
+       
         public IEnumerable<User> GetAllUser()
         {
             return repo.GetAllUser();
@@ -33,6 +33,11 @@ namespace ECommerceWebsite.Services
         public int UpdateUser(User user)
         {
             return repo.UpdateUser(user);
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            return repo.GetUserByEmail(email);
         }
     }
 }

@@ -25,7 +25,7 @@
                 @Html.DisplayNameFor(model => model.Company)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Catname)
+                @Html.DisplayNameFor(model => model.Catid)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Discount)
@@ -56,7 +56,7 @@
                 @Html.DisplayFor(modelItem => item.Company)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Catname)
+                @Html.DisplayFor(modelItem => item.Catid)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Discount)
@@ -68,7 +68,7 @@
                 @Html.DisplayFor(modelItem => item.Stock)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Prodid }) |
+                    @Html.ActionLink("Edit", "Edit", new { id=item.Prodid })
                     @Html.ActionLink("Details", "Details", new { id=item.Prodid }) |
                     @Html.ActionLink("Delete", "Delete", new { id=item.Prodid })
             </td>

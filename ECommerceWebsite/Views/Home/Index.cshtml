@@ -1,8 +1,84 @@
-﻿@{
+﻿@model IEnumerable<ECommerceWebsite.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome To YouNique Shooping</h1>
+
 </div>
+
+<div id="carouselExampleIndicators" class="carousel slide">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/Images/sunset.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="~/Images/nature.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="~/Images/tree.jpg" class="d-block w-100" alt="...">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 col-sm-6 col-xs-12">
+
+                <div id="card" class="card">
+                    <img src="@Url.Content(item.ImageUrl)" class="card-img-top" alt="..." height="150px" width="150px" />
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @item.Prodname
+                            <br /><p>@item.Price &#x20b9</p>
+                        </h5>
+
+                        <p class="card-text">@item.Description</p>
+                        <span style="float:right"><a href="#" class="btn btn-primary btn-sm">View Product</a></span>
+
+                    </div>
+                    @* <div class="card-footer">
+                @if (item.Stock > 0)
+                {
+                <b>Available</b>
+                }
+
+                else
+                {
+                <b>Out of Stock</b>
+                }
+                <span style="float:right"><a href="#" class="btn btn-primary btn-sm">View Product</a></span>
+                </div>
+                *@
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
