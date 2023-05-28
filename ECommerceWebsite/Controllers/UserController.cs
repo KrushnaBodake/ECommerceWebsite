@@ -66,7 +66,7 @@ namespace ECommerceWebsite.Controllers
             {
                 int result = services.UpdateUser(user);
                 if (result == 1)
-                    return RedirectToAction(nameof(Login));
+                 return RedirectToAction(nameof(Login));
             }
             catch
             {
@@ -120,6 +120,9 @@ namespace ECommerceWebsite.Controllers
                     {
                         HttpContext.Session.SetString("RoleId", u.RoleId.ToString());
                         HttpContext.Session.SetString("Id", u.Id.ToString());
+                        HttpContext.Session.SetString("UserName",u.Email);
+                        TempData["username"]= HttpContext.Session.GetString("UserName");
+                        TempData.Keep("username");
                         if (u.RoleId == 1)
                         {
                             return RedirectToAction("Index","Product");
@@ -136,12 +139,17 @@ namespace ECommerceWebsite.Controllers
                     }
                     
                 }
+                else
+                {
+                    ViewBag.errormessag = "you dont have a Account Please Register";
+                    return View();
+                }
             }
             catch
             {
                 return View();
             }
-            return View();
+            
 
 
         }

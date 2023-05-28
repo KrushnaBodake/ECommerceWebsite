@@ -16,7 +16,7 @@ namespace ECommerceWebsite.Controllers
             this.catservice = catservice;
             this.env = env;
         }
-
+        // GET: ProductController/Index
         public ActionResult Index()
         {
             var Plist = prodservice.GetAllProduct();
@@ -34,14 +34,29 @@ namespace ECommerceWebsite.Controllers
             return View(Plist);
         }
 
-       
-
 
         // GET: ProductController/Details/5
         public ActionResult Details(int id)
         {
+            
+            var Plist = prodservice.GetAllProduct();
+            var Clist = catservice.GetAllCategories();
+            foreach (Product item in Plist)
+            {
+                if (item.Prodid == id)
+                {
+                    foreach (Category item1 in Clist)
+                    {
+                        if (item1.Catid == item.Catid)
+                        {
+                            ViewData["Name"] = item1.Catname;
+                        }
+                    }
+                }
+            }
 
             var product = prodservice.GetProductById(id);
+
             return View(product);
         }
 
@@ -99,11 +114,12 @@ namespace ECommerceWebsite.Controllers
                 }
                 prod.ImageUrl = "~/Images/" + file.FileName;
 
-                string[] str = oldimageurl.Split("/");
-                string str1 = (str[str.Length - 1]);
-                string path = env.WebRootPath + "\\Images\\" + str1;
-                System.IO.File.Delete(path);
+                string[] str = oldimageurl.Split("/");    // ~   images   img.jpg
+                string str1 = (str[str.Length - 1]);      // img.jpg
+                string path = env.WebRootPath + "\\Images\\" + str1;    // img.jpg
+                System.IO.File.Delete(path);     // img.jpg
             }
+
             else
             {
                 prod.ImageUrl = oldimageurl;

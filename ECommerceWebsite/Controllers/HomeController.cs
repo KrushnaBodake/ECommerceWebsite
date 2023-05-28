@@ -21,6 +21,12 @@ namespace ECommerceWebsite.Controllers
         {
             return View(prodservice.GetAllProduct());
         }
+        public IActionResult Details()
+        {
+  
+            return RedirectToAction("Login", "User");
+        }
+
 
         public IActionResult Privacy()
         {

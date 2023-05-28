@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ECommerceWebsite.Models.Cart>
+
+@{
+    ViewData["Title"] = "CartIndex";
+}
+
+<h1>CartIndex</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prodid)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prodid)
+            </td>
+            <td>
+                <a href="~/Cart/Delete/@item.Cartid" class="btn btn-primary btn-sm">Delete</a>
+                <a href="~/Cart/Edit/@item.Cartid" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="~/Order/AddOrder" class="btn btn-primary btn-sm">Order</a>
+
+                   
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

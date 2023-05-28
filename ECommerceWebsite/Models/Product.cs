@@ -14,7 +14,7 @@ namespace ECommerceWebsite.Models
         [Required]
         public decimal Price { get; set;}
 
-        [Display(Name = "Upload Image")]
+        [Display(Name = "Product Image")]
         public string? ImageUrl { get; set; }
         [Required]
         public string? Company  { get; set;}

@@ -40,7 +40,16 @@
                     }
                 </p>
                 
+                <div class="form-group">
+                    <p>
+                        @if (!string.IsNullOrEmpty(ViewBag.errormessag))
+                        {
+                            @ViewBag.errormessag
+                        }
+                    </p>
+                </div>
             </div>
+            
         </form>
     </div>
 </div>

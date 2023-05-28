@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ECommerceWebsite.styles.css" asp-append-version="true" />
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -18,12 +19,20 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">cartIndex</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Orders</a>
                         </li>
 
                         @if (HttpContextAccessor.HttpContext.Session.GetString("RoleId") == "1")
@@ -36,40 +45,61 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
+                                
                             </li>
                         }
                         @if (HttpContextAccessor.HttpContext.Session.GetString("RoleId") == "2")
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="UserProduct" asp-action="Index">Products</a>
+                                
                             </li>
-                        }
 
-
-                       
+                        }                     
                     </ul>
-                   <ul  class="navbar-nav flex-grow-1" mb-3>
+           
+                   <ul  class="navbar-nav" mb-3>
                       
                         @if (string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Id")))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Create">Create User</a>
+                                
                             </li>
+                              
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login User</a>
-                            </li>
+                               
+                            </li>                          
+                           
                         }
                         @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Id")))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="LogOut">Log Out</a>
+                                <h6 class="nav-link text-dark"> Welcome @TempData["username"]</h6>
                             </li>
-                        }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="UserProduct" asp-action="CartById">Cart</a>
+                            </li>
+                          
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="LogOut"><h6>Log Out</h6></a>
+                                
+                            </li>
 
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Orders</a>
+                               
+                            </li>
+                        }              
                    </ul>
+                   
+                   
+
                 </div>
             </div>
         </nav>
+      
     </header>
     <div class="container">
         <main role="main" class="pb-3">

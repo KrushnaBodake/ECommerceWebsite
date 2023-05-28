@@ -59,8 +59,10 @@
                         </h5>
 
                         <p class="card-text">@item.Description</p>
-                        <span style="float:right"><a href="#" class="btn btn-primary btn-sm">View Product</a></span>
-
+                        <span style="float:right">
+                            <a href="~/Home/Details/@item.Prodid" class="btn btn-primary btn-sm">View Product</a>
+                        </span>
+                        
                     </div>
                     @* <div class="card-footer">
                 @if (item.Stock > 0)

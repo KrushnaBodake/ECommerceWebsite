@@ -6,38 +6,54 @@
 
 
 <div class="container">
+
     <div class="row">
+
         @foreach (var item in Model)
         {
-            <div class="col-md-3 col-sm-6 col-xs-12">
+           @* if (@item.Prodname == "SmartPhone")
+            {*@
+                <div class="col-md-3 col-sm-6 col-xs-12">
 
-                <div id="card" class="card">
-                    <img src="@Url.Content(item.ImageUrl)" class="card-img-top" alt="..." height="150px" width="150px" />
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            @item.Prodname
-                            <br /><p>@item.Price &#x20b9</p>
-                        </h5>
+                    <div id="card" class="card">
+                        <img src="@Url.Content(item.ImageUrl)" class="card-img-top" alt="..." height="150px" width="150px" />
+                        <div class="card-body">
+                            <h5 class="card-title">
 
-                        <p class="card-text">@item.Description</p>
+                                @item.Prodname
+                                <br /><p>@item.Price &#x20b9</p>
+                                <p class="card-text">@item.Company
+                                </p>
 
 
-                    </div>
-                    <div class="card-footer">
-                        @if (item.Stock > 0)
-                        {
-                            <b>Available</b>
-                        }
 
-                        else
-                        {
-                            <b>Out of Stock</b>
-                        }
-                        <span style="float:right"><a href="#" class="btn btn-primary btn-sm">View Product</a></span>
+                            </h5>
+
+                            <p class="card-text">@item.Description</p>
+
+                        </div>
+                        <div class="card-footer">
+                            @if (item.Stock > 0)
+                            {
+                                <b>Available</b>
+                            }
+
+                            else
+                            {
+                                <b>Out of Stock</b>
+                            }
+                            
+                        <span style="float:right">
+                            <a href="~/UserProduct/Details/@item.Prodid" class="btn btn-primary btn-sm">View Product</a>
+                        </span>
+                       
+                        
                     </div>
 
                 </div>
+                
             </div>
+           @* }*@
         }
     </div>
 </div>
